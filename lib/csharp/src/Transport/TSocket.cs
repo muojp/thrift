@@ -22,6 +22,7 @@
  */
 
 using System;
+using System.Net;
 using System.Net.Sockets;
 
 namespace Thrift.Transport
@@ -134,7 +135,9 @@ namespace Thrift.Transport
 
             if (timeout == 0)            // no timeout -> infinite
             {
-                client.Connect(host, port);
+                //client.Connect(host, port);
+                var point = new IPEndPoint(IPAddress.Parse(host), port);
+                client.Connect(point);
             }
             else                        // we have a timeout -> use it
             {
